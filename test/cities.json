@@ -1,0 +1,174 @@
+[
+  {
+    "description": "Asheville, NC, USA",
+    "matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "place_id": "ChIJCW8PPKmMWYgRXTo0BsEx75Q",
+    "reference": "ChIJCW8PPKmMWYgRXTo0BsEx75Q",
+    "structured_formatting": {
+      "main_text": "Asheville",
+      "main_text_matched_substrings": [
+        {
+          "length": 2,
+          "offset": 0
+        }
+      ],
+      "secondary_text": "NC, USA"
+    },
+    "terms": [
+      {
+        "offset": 0,
+        "value": "Asheville"
+      },
+      {
+        "offset": 11,
+        "value": "NC"
+      },
+      {
+        "offset": 15,
+        "value": "USA"
+      }
+    ],
+    "types": ["locality", "political", "geocode"]
+  },
+  {
+    "description": "Aspen, CO, USA",
+    "matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "place_id": "ChIJfTxB93w5QIcRcvYseNxCK8E",
+    "reference": "ChIJfTxB93w5QIcRcvYseNxCK8E",
+    "structured_formatting": {
+      "main_text": "Aspen",
+      "main_text_matched_substrings": [
+        {
+          "length": 2,
+          "offset": 0
+        }
+      ],
+      "secondary_text": "CO, USA"
+    },
+    "terms": [
+      {
+        "offset": 0,
+        "value": "Aspen"
+      },
+      {
+        "offset": 7,
+        "value": "CO"
+      },
+      {
+        "offset": 11,
+        "value": "USA"
+      }
+    ],
+    "types": ["locality", "political", "geocode"]
+  },
+  {
+    "description": "Aschaffenburg, Germany",
+    "matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "place_id": "ChIJFyDtEeRHvUcR4IgWHuTsZJk",
+    "reference": "ChIJFyDtEeRHvUcR4IgWHuTsZJk",
+    "structured_formatting": {
+      "main_text": "Aschaffenburg",
+      "main_text_matched_substrings": [
+        {
+          "length": 2,
+          "offset": 0
+        }
+      ],
+      "secondary_text": "Germany"
+    },
+    "terms": [
+      {
+        "offset": 0,
+        "value": "Aschaffenburg"
+      },
+      {
+        "offset": 15,
+        "value": "Germany"
+      }
+    ],
+    "types": ["locality", "political", "geocode"]
+  },
+  {
+    "description": "Asansol, West Bengal, India",
+    "matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "place_id": "ChIJKSUCoQ4f9zkR_s4R_ef3iPg",
+    "reference": "ChIJKSUCoQ4f9zkR_s4R_ef3iPg",
+    "structured_formatting": {
+      "main_text": "Asansol",
+      "main_text_matched_substrings": [
+        {
+          "length": 2,
+          "offset": 0
+        }
+      ],
+      "secondary_text": "West Bengal, India"
+    },
+    "terms": [
+      {
+        "offset": 0,
+        "value": "Asansol"
+      },
+      {
+        "offset": 9,
+        "value": "West Bengal"
+      },
+      {
+        "offset": 22,
+        "value": "India"
+      }
+    ],
+    "types": ["locality", "political", "geocode"]
+  },
+  {
+    "description": "Assen, Netherlands",
+    "matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "place_id": "ChIJseF6z8EkyEcRw3VRvhPkUMM",
+    "reference": "ChIJseF6z8EkyEcRw3VRvhPkUMM",
+    "structured_formatting": {
+      "main_text": "Assen",
+      "main_text_matched_substrings": [
+        {
+          "length": 2,
+          "offset": 0
+        }
+      ],
+      "secondary_text": "Netherlands"
+    },
+    "terms": [
+      {
+        "offset": 0,
+        "value": "Assen"
+      },
+      {
+        "offset": 7,
+        "value": "Netherlands"
+      }
+    ],
+    "types": ["locality", "political", "geocode"]
+  }
+]
