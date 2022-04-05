@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import data from "../../test/aspen.json"
+import data from "../../../data/aspen.json"
 
 const CityItem = ({ description, place_id }) => {
   const router = useRouter()

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { readFile } from "../../utils/utils"
+import { readFile } from "../../utils/readFile"
 
 const Weather = ({ data }) => {
   const [loading, setLoading] = useState(false)
@@ -43,7 +43,7 @@ export const getServerSideProps = async (context) => {
   //     appid: process.env.OPENWEATHER_API_KEY,
   //   },
   // })
-  const data = await readFile({ dir: process.cwd(), paths: ['test', 'weatherData.json'] })
+  const data = await readFile({ dir: process.cwd(), paths: ['data', 'weatherData.json'] })
   return {
     props: { data },
   }

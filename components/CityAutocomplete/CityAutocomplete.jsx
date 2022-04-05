@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import CityList from '../CityList/CityList'
-import cities from "../../test/cities.json"
+import { Center, Flex, Box, InputGroup, Input, InputRightElement } from '@chakra-ui/react'
+import { CheckIcon } from '@chakra-ui/icons'
+import CityList from './CityList'
+import cities from '../../data/cities.json'
 
 const PlacesAutocomplete = () => {
   const [query, setQuery] = useState('')
@@ -30,12 +32,29 @@ const PlacesAutocomplete = () => {
   const onSelect = async () => {}
 
   return (
-    <div>
-      <input value={query} onChange={onChange} />
-      <CityList cities={cities} />
-    </div>
+    <Center>
+      <Flex flexDirection='column'>
+        <Box m={3}>
+          <InputGroup>
+            <Input
+              size='lg'
+              variant='flushed'
+              placeholder='Enter city...'
+              value={query}
+              onChange={onChange}
+            />
+            <InputRightElement>
+              {/* {suggestions.length > 0 && <CheckIcon color='green.500' />} */}
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+
+        <Box m={3} p={1}>
+          <CityList cities={cities} />
+        </Box>
+      </Flex>
+    </Center>
   )
 }
 
 export default PlacesAutocomplete
-

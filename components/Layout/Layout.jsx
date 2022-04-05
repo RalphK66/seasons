@@ -1,25 +1,22 @@
-
 import styles from './Layout.module.css'
 import StickyFooter from '../StickyFooter'
 import Header from '../Header/Header'
+import { Box, Flex } from '@chakra-ui/react'
 
 const LayoutBox = ({ children }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-      }}>
+    <Flex flexDirection={'column'} minHeight='100vh'>
       {children}
-    </div>
+    </Flex>
   )
 }
 const Layout = ({ children }) => {
   return (
     <LayoutBox>
       <Header />
-      {children}
+      <Box w={'md'} minW='fit-content' mx='auto'>
+        {children}
+      </Box>
       <StickyFooter />
     </LayoutBox>
   )
