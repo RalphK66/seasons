@@ -1,9 +1,4 @@
 import { DateTime } from 'luxon'
-import readFile from '../readFile.mjs'
-const { hourly, timezone } = await readFile({
-  dir: process.cwd(),
-  paths: ['data', 'weatherData.json'],
-})
 
 import _ from 'lodash'
 
