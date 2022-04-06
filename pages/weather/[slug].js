@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { readFile } from "../../utils/readFile"
+import { readFile } from "../../utils/readFile.mjs"
 
 const Weather = ({ data }) => {
   const [loading, setLoading] = useState(false)

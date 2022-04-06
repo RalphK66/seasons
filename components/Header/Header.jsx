@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Button, Link } from '@chakra-ui/react'
+import { Box, Flex, Heading, Button, Link, Text } from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/react'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 import { TiArrowBack } from 'react-icons/ti'
@@ -15,15 +15,18 @@ const Header = () => {
             {<Icon as={TiArrowBack} w={6} h={6} />}
           </Button>
         </NextLink>
-        <NextLink href='/' passHref>
-          <Heading
-            as={'a'}
-            mx='auto'
-            fontSize={['xl', '3xl', '5xl']}
-            transition={'font-size 0.3s ease'}>
-            Seasons Weather
-          </Heading>
-        </NextLink>
+        <Box>
+          <NextLink href='/' passHref>
+            <Heading
+              as={'a'}
+              mx='auto'
+              fontSize={['xl', '3xl', '5xl']}
+              transition={'font-size 0.3s ease'}>
+              Seasons Weather
+            </Heading>
+          </NextLink>
+        </Box>
+
         <Button onClick={toggleColorMode} colorScheme='blue'>
           <Icon as={colorMode === 'light' ? BsMoonStarsFill : BsSunFill} w={6} h={6} />
         </Button>

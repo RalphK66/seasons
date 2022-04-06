@@ -1,20 +1,11 @@
-import { addSeconds, fromUnixTime } from 'date-fns'
-// import { zonedTimeToUtc, utcToZonedTime, format } from 'date-fns-tz/esm'
+import { DateTime } from 'luxon'
+import readFile from '../readFile.mjs'
+const { hourly, current, timezone } = await readFile({
+  dir: process.cwd(),
+  paths: ['data', 'weatherData.json'],
+})
 
-export const fromUnix = (timestamp) => {
-  return fromUnixTime(timestamp)
-}
-
-export const UTCtoLocal = (timestamp, offsetInSec) => {
-  const UTC = fromUnix(timestamp)
-  const local = addSeconds(UTC, offsetInSec)
-  return local
-}
-
-// console.log(fromUnix(1649076404))
-// const local = UTCtoLocal(1649076404, -21600)
-// console.log(local)
-// console.log(utcToZonedTime(fromUnix(1649076404), "America/Denver"))
+import _ from 'lodash'
 
 export const convertSecToHMS = (sec) => {
   if (sec === 0) return { sign: '', hours: 0, minutes: 0, seconds: 0 }
@@ -28,4 +19,28 @@ export const convertSecToHMS = (sec) => {
   return { sign, hours, minutes, seconds }
 }
 
+const getHourlyWeather = ({ hourly, timezone }) => {
+  const eodToday = DateTime.local({ zone: timezone }).endOf('day')
+  const eodTodayTimestamp = eodToday.toUnixInteger()
 
+  const eodTomorrow = eodToday.plus({ days: 1 })
+  const eodTomorrowTimestamp = eodTomorrow.toUnixInteger()
+
+  const hourlyData = { today: [], tomorrow: [], nextDay: [] }
+
+  hourly.forEach((hourData) => {
+    if (hourData.dt < eodTodayTimestamp) {
+      hourlyData.today.push(hourData)
+    } else if (hourData.dt > eodTodayTimestamp && hourData.dt < eodTomorrowTimestamp) {
+      hourlyData.tomorrow.push(hourData)
+    } else {
+      hourlyData.nextDay.push(hourData)
+    }
+  })
+
+  // Object.entries(hourlyData).forEach(([k, v]) => console.log(k, v.length))
+
+  return hourlyData
+}
+
+getHourlyWeather({ hourly, timezone })
