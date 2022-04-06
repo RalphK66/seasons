@@ -14,7 +14,7 @@ const CityItem = ({ description, place_id }) => {
     const slug = main_text.replace(' ', '_')
     router.push({
       pathname: '/weather/[slug]',
-      query: { lat, lng, slug },
+      query: { lat, lng, slug, description },
     })
   }
 
