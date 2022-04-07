@@ -1,0 +1,36 @@
+{
+  "description": "Vancouver, BC, Canada",
+  "matched_substrings": [
+    {
+      "length": 2,
+      "offset": 0
+    }
+  ],
+  "place_id": "ChIJs0-pQ_FzhlQRi_OBm-qWkbs",
+  "reference": "ChIJs0-pQ_FzhlQRi_OBm-qWkbs",
+  "structured_formatting": {
+    "main_text": "Vancouver",
+    "main_text_matched_substrings": [
+      {
+        "length": 2,
+        "offset": 0
+      }
+    ],
+    "secondary_text": "BC, Canada"
+  },
+  "terms": [
+    {
+      "offset": 0,
+      "value": "Vancouver"
+    },
+    {
+      "offset": 11,
+      "value": "BC"
+    },
+    {
+      "offset": 15,
+      "value": "Canada"
+    }
+  ],
+  "types": ["locality", "political", "geocode"]
+}

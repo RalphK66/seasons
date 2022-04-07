@@ -1,7 +1,10 @@
-import styles from './Layout.module.css'
-import StickyFooter from '../StickyFooter'
-import Header from '../Header/Header'
 import { Box, Flex } from '@chakra-ui/react'
+
+import Header from '../Header/Header'
+import StickyFooter from '../StickyFooter'
+
+
+
 
 const LayoutBox = ({ children }) => {
   return (
@@ -11,6 +14,7 @@ const LayoutBox = ({ children }) => {
   )
 }
 const Layout = ({ children }) => {
+
   return (
     <LayoutBox>
       <Header />

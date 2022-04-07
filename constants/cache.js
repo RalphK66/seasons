@@ -1,1 +1,0 @@
-export const CACHE_MAX_AGE = 60 * 30 // 30 min

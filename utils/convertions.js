@@ -1,3 +1,24 @@
+// velocity - metric
+export const msToKmh = (ms) => {
+  return ms * 3.6
+}
+// Pressure - metric
+export const hpaTobar = (hPa) => {
+  return hPa / 1000
+}
+// Pressure - imperial
+export const hpaToHg = (hPa) => {
+  return hPa * 0.0295
+}
+// Accumulation - metric
+export const mmToCm = (mm) => {
+  return mm / 10
+}
+// Accumulation - imperial
+export const mmToIn = (mm) => {
+  return mm / 25.4
+}
+
 export const windDirection = (deg) => {
   if (deg > 348.75 || deg <= 11.25) return 'N'
   if (deg > 11.25 || deg <= 33.75) return 'NNE'

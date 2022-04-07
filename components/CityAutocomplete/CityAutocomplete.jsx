@@ -1,26 +1,22 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { Center, Flex, Box, InputGroup, Input, InputRightElement } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { Box, Center, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
-import CityList from './CityList'
-import cities from '../../data/cities.json'
+import CityItem from './CityItem'
+import predictions from "../../data/cities.json"
+
 
 const PlacesAutocomplete = () => {
   const [query, setQuery] = useState('')
-  const [status, setStatus] = useState(null)
-  // const [suggestions, setSuggestions] = useState([])
+  // const [predictions, setPredictions] = useState(null)
 
   // useEffect(() => {
-  //   const getSuggestions = async () => {
-  //     const results = await axios.post('/api/places', { query })
-  //     const { predictions, status } = results.data
-  //     setStatus(status)
-  //     setSuggestions(predictions)
-  //     console.log(predictions)
-
+  //   const autoComplete = async () => {
+  //     const { data } = await axios.get('/api/places', { params: { query } })
+  //     setPredictions(data.predictions)
   //   }
   //   if (query) {
-  //     getSuggestions()
+  //     autoComplete()
   //   }
   // }, [query])
 
@@ -28,8 +24,6 @@ const PlacesAutocomplete = () => {
     const { value } = e.target
     setQuery(value)
   }
-
-  const onSelect = async () => {}
 
   return (
     <Center>
@@ -44,13 +38,14 @@ const PlacesAutocomplete = () => {
               onChange={onChange}
             />
             <InputRightElement>
-              {/* {suggestions.length > 0 && <CheckIcon color='green.500' />} */}
+              {predictions?.length > 0 && <CheckIcon color='green.500' />}
             </InputRightElement>
           </InputGroup>
         </Box>
-
         <Box m={3} p={1}>
-          <CityList cities={cities} />
+          {predictions?.map((prediction, idx) => (
+            <CityItem key={idx} location={prediction} />
+          ))}
         </Box>
       </Flex>
     </Center>

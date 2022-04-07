@@ -1,14 +1,17 @@
 import axios from 'axios'
-import { CACHE_MAX_AGE } from '../../constants/cache'
+import { CACHE_MAX_AGE } from '../../constants'
 
 const places = async (req, res) => {
-  const { query } = req.body
+  const { query } = req.query
 
-  const results = await axios.get(
-    `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=(cities)&key=${process.env.GOOGLE_MAPS_API_KEY}`
-  )
+  const { data } = await axios({
+    method: 'GET',
+    url: `${process.env.GOOGLE_MAPS_API_BASE_URL}/place/autocomplete/json`,
+    params: { input: query, types: '(cities)', key: process.env.GOOGLE_MAPS_API_KEY },
+  })
+
   res.setHeader('Cache-Control', `s-maxage=${CACHE_MAX_AGE}`, 'max-age=0', 'stale-while-revalidate')
-  res.status(200).json(results.data)
+  res.status(200).json(data)
 }
 
 export default places

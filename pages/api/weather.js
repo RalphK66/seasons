@@ -1,21 +1,26 @@
 import axios from 'axios'
-import { CACHE_MAX_AGE } from '../../constants/cache'
+import { UNITS } from '../../constants'
 
 const weather = async (req, res) => {
-  const { lat, lng } = req.body
+  const { lat, lng } = req.query
+  console.log(req.query)
 
-  const result = await axios({
-    method: 'GET',
-    url: process.env.OPENWEATHER_ONECALL_URL,
-    params: {
-      lat: lat,
-      lon: lng,
-      appid: process.env.OPENWEATHER_API_KEY,
-    },
-  })
+  // const requests = UNITS.map((unit) =>
+  //   axios({
+  //     method: 'GET',
+  //     url: process.env.OPENWEATHER_ONECALL_URL,
+  //     params: {
+  //       lat: lat,
+  //       lon: lng,
+  //       appid: process.env.OPENWEATHER_API_KEY,
+  //       units: unit,
+  //     },
+  //   })
+  // )
+  // const [metric, imperial] = await Promise.all(requests)
 
-  res.setHeader('Cache-Control', `s-maxage=${CACHE_MAX_AGE}`, 'max-age=0', 'stale-while-revalidate')
-  res.status(200).json(result.data)
+  // res.status(200).json({ metric: metric.data, imperial: imperial.data })
+  res.status(200).json({ success: 'OK' })
 }
 
 export default weather

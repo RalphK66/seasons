@@ -1,46 +1,19 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import path from 'path'
-import fs from 'fs/promises'
-import DailyWeather from '../../components/Weather/DailyWeather'
-import { Box } from '@chakra-ui/react'
-import Today from '../../components/Weather/Today'
+import { Box, Button } from '@chakra-ui/react'
+import { useState } from 'react'
+import { UNIT, UNITS } from '../../constants'
+import Today from '../../components/Weather/Today/Today'
+import readFile from "../../utils/readFile"
 
-const readFile = async ({ dir, paths }) => {
-  const filePath = path.join(dir, ...paths)
-  const joinData = await fs.readFile(filePath)
-  const data = JSON.parse(joinData)
-  return data
-}
+const Weather = ({ weather, location }) => {
+  const [unit, setUnits] = useState(UNIT.metric)
 
-const Weather = ({ data, location }) => {
-  const [loading, setLoading] = useState(false)
-  const [weatherData, setWeatherData] = useState({})
-  console.log(location)
-  const toggleLoading = () => setLoading((prev) => !prev)
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     toggleLoading()
-
-  //     const { data } = await axios.post('/api/weather', { lat, lng })
-  //     console.log(data)
-  //     toggleLoading()
-  //     setWeatherData(weatherData)
-  //   }
-
-  //   if (
-  //     weatherData &&
-  //     Object.keys(weatherData).length === 0 &&
-  //     Object.getPrototypeOf(weatherData) === Object.prototype
-  //   ) {
-  //     getData()
-  //   }
-  // }, [])
+  const toggleUnits = () => setUnits((prev) => (prev === UNIT.metric ? UNIT.imperial : UNIT.metric))
 
   return (
     <Box>
-      {location && <Today weather={data.current} location={location} />}
+      <Button onClick={toggleUnits}>{unit}</Button>
+      {weather && <Today weather={weather[unit]} unit={unit} location={location} />}
     </Box>
   )
 }
@@ -48,20 +21,34 @@ const Weather = ({ data, location }) => {
 export default Weather
 
 export const getServerSideProps = async (context) => {
-  // const { lat, lng, description:location } = context.query
-  // const { data } = await axios({
-  //   method: 'GET',
-  //   url: process.env.OPENWEATHER_ONECALL_URL,
-  //   params: {
-  //     lat: lat,
-  //     lon: lng,
-  //     appid: process.env.OPENWEATHER_API_KEY,
-  //   },
-  // })
-  const data = await readFile({ dir: process.cwd(), paths: ['data', 'weatherData.json'] })
-  const location = { main_text: 'Aspen', secondary_text: 'CO, USA' }
-
+  const { lat, lng, main_text, secondary_text } = context.query
+  const location = { lat, lng, main_text, secondary_text }
+  const weather = await readFile({ dir: process.cwd(), paths: ['data', 'vancouver.json'] })
+  
   return {
-    props: { data, location},
+    props: { weather, location },
   }
 }
+
+// export const getServerSideProps = async (context) => {
+//   const { lat, lng, main_text, secondary_text } = context.query
+
+//   const location = { lat, lng, main_text, secondary_text }
+
+//   const requests = Object.values(UNIT).map((unit) =>
+//     axios({
+//       method: 'GET',
+//       url: process.env.OPENWEATHER_ONECALL_URL,
+//       params: {
+//         lat: lat,
+//         lon: lng,
+//         appid: process.env.OPENWEATHER_API_KEY,
+//         units: unit,
+//       },
+//     })
+//   )
+//   const [metric, imperial] = await Promise.all(requests)
+//   const weather = { metric: metric.data, imperial: imperial.data }
+
+//   return { props: { weather, location } }
+// }
