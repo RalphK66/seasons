@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import { useState } from 'react'
-import { UNIT, UNITS } from '../../constants'
-import Today from '../../components/Weather/Today/Today'
-import readFile from "../../utils/readFile"
+import { UNIT } from '../../constants'
+import Day from '../../components/Weather/Day'
+import readFile from '../../utils/readFile'
+import Loader from '../../components/Loader/Loader'
 
 const Weather = ({ weather, location }) => {
   const [unit, setUnits] = useState(UNIT.metric)
@@ -11,10 +12,16 @@ const Weather = ({ weather, location }) => {
   const toggleUnits = () => setUnits((prev) => (prev === UNIT.metric ? UNIT.imperial : UNIT.metric))
 
   return (
-    <Box>
-      <Button onClick={toggleUnits}>{unit}</Button>
-      {weather && <Today weather={weather[unit]} unit={unit} location={location} />}
-    </Box>
+    <>
+      <Box w={'full'}>
+        <Button onClick={toggleUnits}>{unit}</Button>
+        <Flex flexWrap={'wrap'} justifyContent={'center'}>
+          <Day weather={weather[unit]} unit={unit} location={location} day={0} />
+          <Day weather={weather[unit]} unit={unit} location={location} day={1} />
+        </Flex>
+      </Box>
+
+    </>
   )
 }
 
@@ -24,7 +31,7 @@ export const getServerSideProps = async (context) => {
   const { lat, lng, main_text, secondary_text } = context.query
   const location = { lat, lng, main_text, secondary_text }
   const weather = await readFile({ dir: process.cwd(), paths: ['data', 'vancouver.json'] })
-  
+
   return {
     props: { weather, location },
   }

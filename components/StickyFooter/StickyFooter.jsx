@@ -1,10 +1,10 @@
-import { Text, Link, Center, Flex } from '@chakra-ui/react'
+import { Text, Link, Center, Flex, Box } from '@chakra-ui/react'
 
 const Copyright = () => {
   return (
     <Text>
       {'Copyright © '}
-      <Link color='blue.500' href='https://ralphkilian.ca/'>
+      <Link color='blue.200' href='https://ralphkilian.ca/'>
         Ralph Kilian
       </Link>{' '}
       {` ${new Date().getFullYear()}`}
@@ -14,11 +14,13 @@ const Copyright = () => {
 
 const StickyFooter = () => {
   return (
-    <Center p={5} mt={'auto'}>
-      <Flex flexDirection={'column'} align={"center"}>
-        <Copyright />
-      </Flex>
-    </Center>
+    <Box mt={'auto'}>
+      <Center p={5}>
+        <Flex flexDirection={'column'} align={'center'}>
+          <Copyright />
+        </Flex>
+      </Center>
+    </Box>
   )
 }
 

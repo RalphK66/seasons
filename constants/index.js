@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon'
+
 export const CACHE_MAX_AGE = 60 * 30
 
 export const UNIT = { metric: 'metric', imperial: 'imperial' }
@@ -12,11 +14,15 @@ export const UNIT = { metric: 'metric', imperial: 'imperial' }
 
 export const UNITS = {
   metric: {
-    temp: 'ºC',
+    temp: 'º',
     wind: 'km/h',
     pressure: 'bar',
     rain: 'mm',
     snow: 'cm',
+    dateTime: {
+      time: DateTime.TIME_24_SIMPLE,
+      shortDate: (parts) => parts.map((part, idx) => (idx < 3 ? part.value : '')).join(''),
+    },
   },
   imperial: {
     temp: 'F',
@@ -24,5 +30,13 @@ export const UNITS = {
     pressure: 'inHg',
     rain: 'in',
     snow: 'in',
+    time: DateTime.TIME_SIMPLE,
+    shortDate: (parts) =>
+      parts
+        .map((part, idx) => (idx < 3 ? part.value : ''))
+        .reverse()
+        .join(''),
   },
 }
+
+export const DAY = { 0: 'today', 1: 'tomorrow', 2: 'nextDay' }

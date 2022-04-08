@@ -1,14 +1,14 @@
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
 
 import CityAutocomplete from '../components/CityAutocomplete'
+import Loader from '../components/Loader/Loader'
 
 const Home = () => {
   const render = (status) => {
     switch (status) {
       case Status.LOADING:
-        return <p>spinner</p>
+        return <Loader />
       case Status.FAILURE:
-        f
         return <p>error</p>
       case Status.SUCCESS:
         return <CityAutocomplete />
