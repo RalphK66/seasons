@@ -1,18 +1,23 @@
-import { Box, Flex, Heading, Text, Spacer } from '@chakra-ui/react'
-import { useColorModeValue } from '@chakra-ui/react'
-import { shortDate } from '../../../utils/dateTime'
-import { DAY, UNITS } from '../../../constants'
+import { Box, Flex, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
+import { useState } from 'react'
+import { ImArrowRight } from 'react-icons/im'
+import { DAY, UNITS } from '../../../constants'
+import { shortDate } from '../../../utils/dateTime'
+import Details from '../Details/Details'
 
 const Day = ({ weather, location, unit, day }) => {
+  const [showDetails, setShowDetails] = useState(false)
   const units = UNITS[unit]
   const weatherData = weather.daily[day]
   const dateTime = DateTime.fromSeconds(weatherData.dt, { zone: weather.timezone })
   const iconUrl = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`
 
   return (
-    <Box
+    <Flex
+      position={'relative'}
+      flexDirection={'column'}
       m={4}
       p={4}
       bg={useColorModeValue('white', 'blue.500')}
@@ -39,7 +44,17 @@ const Day = ({ weather, location, unit, day }) => {
         </Flex>
       </Flex>
       <Text>{weatherData.weather[0].description}</Text>
-    </Box>
+      <Box
+        role='button'
+        position={'absolute'}
+        top={'50%'}
+        right={0}
+        m={1}
+        onClick={() => setShowDetails((prev) => !prev)}>
+        <ImArrowRight />
+      </Box>
+      {showDetails && <Details weatherData={weatherData} unit={unit} zone={weather.timezone}/>}
+    </Flex>
   )
 }
 
