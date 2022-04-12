@@ -1,34 +1,25 @@
-import { DateTime } from 'luxon'
-
 export const CACHE_MAX_AGE = 60 * 30
 
 export const UNIT = { metric: 'metric', imperial: 'imperial' }
-
 
 export const UNITS = {
   metric: {
     temp: 'º',
     wind: 'km/h',
-    pressure: 'bar',
-    rain: 'mm',
-    snow: 'cm',
-    dateTime: {
-      time: DateTime.TIME_24_SIMPLE,
-      shortDate: (parts) => parts.map((part, idx) => (idx < 3 ? part.value : '')).join(''),
-    },
+    pressure: 'mBar',
+    accumalation: 'mm',
+    precipitation: '%',
+    clouds: '%',
+    humidity: '%',
   },
   imperial: {
-    temp: 'F',
+    temp: 'º',
     wind: 'm/h',
     pressure: 'inHg',
-    rain: 'in',
-    snow: 'in',
-    time: DateTime.TIME_SIMPLE,
-    shortDate: (parts) =>
-      parts
-        .map((part, idx) => (idx < 3 ? part.value : ''))
-        .reverse()
-        .join(''),
+    accumalation: 'in',
+    precipitation: '%',
+    clouds: '%',
+    humidity: '%',
   },
 }
 

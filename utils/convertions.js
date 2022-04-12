@@ -2,6 +2,10 @@
 export const ms_kmh = (ms) => {
   return ms * 3.6
 }
+// velocity - imperial
+export const ms_mhr = (ms) => {
+  return ms * 2.2369
+}
 // Pressure - metric
 export const hpa_bar = (hPa) => {
   return hPa / 1000
@@ -16,5 +20,5 @@ export const mm_Cm = (mm) => {
 }
 // Accumulation - imperial
 export const mm_In = (mm) => {
-  return mm / 25.4
+  return Math.fround(mm / 25.4)
 }

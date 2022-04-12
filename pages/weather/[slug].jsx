@@ -1,26 +1,39 @@
-import axios from 'axios'
 import { Box, Button, Flex } from '@chakra-ui/react'
-import { useState } from 'react'
-import { UNIT } from '../../constants'
+import { useMemo, useState } from 'react'
 import Day from '../../components/Weather/Day'
+import Hourly from '../../components/Weather/Hourly'
+import Week from '../../components/Weather/Week/Week'
+import { UNIT } from '../../constants'
+import { formattedWeatherData } from '../../controllers/weather'
 import readFile from '../../utils/readFile'
-import Loader from '../../components/Loader/Loader'
 
 const Weather = ({ weather, location }) => {
   const [unit, setUnits] = useState(UNIT.metric)
 
   const toggleUnits = () => setUnits((prev) => (prev === UNIT.metric ? UNIT.imperial : UNIT.metric))
 
+  const { metric, imperial } = useMemo(
+    () => formattedWeatherData({ metric: weather.metric, imperial: weather.imperial }),
+    [weather]
+  )
+
   return (
     <>
       <Box w={'full'}>
         <Button onClick={toggleUnits}>{unit}</Button>
-        <Flex flexWrap={'wrap'} justifyContent={'center'}>
-          <Day weather={weather[unit]} unit={unit} location={location} day={0} />
-          <Day weather={weather[unit]} unit={unit} location={location} day={1} />
-        </Flex>
+        <Box>
+          <Flex flexWrap={'wrap'} justify={'center'}>
+            <Day data={unit === UNIT.metric ? metric.daily[0] : imperial.daily[0]} day={0} />
+            <Day data={unit === UNIT.metric ? metric.daily[1] : imperial.daily[0]} day={1} />
+          </Flex>
+          <Flex justify={'center'} m={4}>
+            <Week data={unit === UNIT.metric ? metric.daily : imperial.daily} />
+          </Flex>
+          <Flex justify={'center'} m={4}>
+            <Hourly data={unit === UNIT.metric ? metric.hourly : imperial.hourly} />
+          </Flex>
+        </Box>
       </Box>
-
     </>
   )
 }
@@ -38,6 +51,11 @@ export const getServerSideProps = async (context) => {
 }
 
 // export const getServerSideProps = async (context) => {
+// context.res.setHeader(
+//   'Cache-Control',
+//   'public, s-maxage=3600, stale-while-revalidate=3600'
+// )
+
 //   const { lat, lng, main_text, secondary_text } = context.query
 
 //   const location = { lat, lng, main_text, secondary_text }
@@ -51,6 +69,7 @@ export const getServerSideProps = async (context) => {
 //         lon: lng,
 //         appid: process.env.OPENWEATHER_API_KEY,
 //         units: unit,
+//         exclude: 'minutely,alerts'
 //       },
 //     })
 //   )

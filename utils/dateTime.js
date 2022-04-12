@@ -39,17 +39,12 @@ const getHourlyWeather = ({ hourly, timezone }) => {
 
 // getHourlyWeather({ hourly, timezone })
 
-export const shortTime = ({dateTime = DateTime.now(), unit}) => {
-  return dateTime.toLocaleString(
-    unit === UNIT.metric ? DateTime.TIME_24_SIMPLE : DateTime.TIME_SIMPLE
-  )
+export const shortTime = ({ dateTime, unit }) => {
+  const format = unit === UNIT.metric ? DateTime.TIME_24_SIMPLE : DateTime.TIME_SIMPLE
+  return dateTime.toLocaleString(format)
 }
 
-export const shortDate = ({dateTime = DateTime.now(), unit}) => {
-  const parts = dateTime.toLocaleParts().map((part, idx) => {
-    if (idx < 3) {
-      return part.value
-    }
-  })
-  return unit === UNIT.metric ? parts.join('') : parts.reverse().join('')
+export const shortDate = ({ dateTime, unit }) => {
+  const date = [dateTime.day, dateTime.month]
+  return unit === UNIT.metric ? date.join('/') : date.reverse().join('/')
 }
