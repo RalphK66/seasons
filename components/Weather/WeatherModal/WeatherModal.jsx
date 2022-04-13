@@ -1,4 +1,5 @@
 import {
+  Box,
   Flex,
   Heading,
   IconButton,
@@ -34,13 +35,14 @@ const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = fals
       scrollBehavior={'inside'}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader p={0} mt={4} pr={4}>
+        <ModalHeader>
           <Flex align={'center'}>
             <Image
               src={day.info.description.iconUrl}
               alt={'weather icon'}
-              width={128}
-              height={128}
+              layout={'intrinsic'}
+              width={96}
+              height={96}
             />
             <Flex flexDir={'column'}>
               <Heading size={'lg'}>
@@ -57,12 +59,13 @@ const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = fals
                 icon={unit === UNIT.metric ? <RiFahrenheitFill /> : <RiCelsiusFill />}
               />
             </Flex>
+            <Spacer />
           </Flex>
         </ModalHeader>
         <ModalCloseButton size={'lg'} color={'red.500'} />
         <ModalBody>
           <TableContainer mb={4}>
-            <Table variant='simple' size={'md'}>
+            <Table variant='simple' size={['sm', 'sm', 'md']}>
               <Tbody>
                 {Object.values(day.weather).map((el, idx) => {
                   return (
