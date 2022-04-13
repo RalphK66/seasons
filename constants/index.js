@@ -24,3 +24,5 @@ export const UNITS = {
 }
 
 export const DAY = { 0: 'today', 1: 'tomorrow' }
+
+export const HEADER_HEIGHT = '200px'

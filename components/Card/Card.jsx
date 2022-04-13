@@ -3,7 +3,6 @@ import { Flex, useColorModeValue } from '@chakra-ui/react'
 const Card = (props) => {
   return (
     <Flex
-      pos={'relative'}
       flexDir={'column'}
       m={4}
       p={4}

@@ -13,7 +13,8 @@ const Week = ({ data }) => {
       textAlign={'center'}
       maxWidth='1032px'
       width={'100%'}
-      shadow={'dark-lg'}>
+      shadow={'dark-lg'}
+      transition={'background-color 0.3s ease-in-out'}>
       <Heading size={'md'} mb={4}>
         WEEKLY
       </Heading>

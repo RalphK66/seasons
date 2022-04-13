@@ -24,7 +24,8 @@ const WeatherForecast = ({ weather, location }) => {
         justify={'center'}
         bg={useColorModeValue('white', 'black')}
         shadow={'dark-lg'}
-        borderRadius={5}>
+        borderRadius={5}
+        transition={'background-color 0.3s ease-in-out'}>
         <Heading>{location.main_text}</Heading>
         <Text>{location.secondary_text}</Text>
         <Divider my={2} borderColor={useColorModeValue('gray.500', 'gray.100')} />

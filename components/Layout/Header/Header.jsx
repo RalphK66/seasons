@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 import { FaArrowLeft } from 'react-icons/fa'
 import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
-import { UNIT } from '../../../constants'
+import { HEADER_HEIGHT, UNIT } from '../../../constants'
 import { UnitContext } from '../../../context/UnitContext'
 
 const Header = () => {
@@ -14,14 +14,16 @@ const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Box
+      pos={'fixed'}
+      zIndex={'999'}
       p={1}
-      h={'200px'}
+      h={HEADER_HEIGHT}
       w={'100%'}
       bgImage="url('/images/seasons_banner.png')"
       bgPos='center'
       bgSize={'cover'}
       bgRepeat='no-repeat'>
-      <Flex pos={'relative'} align='center' justify={'center'} w={'100%'} h={'100%'}>
+      <Flex pos={'relative'} align={'center'} justify={'center'} w={'100%'} h={'100%'}>
         {router.asPath !== '/' && (
           <Box pos={'absolute'} left={0} m={1}>
             <NextLink href='/' passHref shallow>
