@@ -5,7 +5,8 @@ import { useContext } from 'react'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 import { FaArrowLeft } from 'react-icons/fa'
 import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
-import { HEADER_HEIGHT, UNIT } from '../../../constants'
+import { HEADER_HEIGHT } from '../../../constants'
+import { UNIT } from '../../../constants/weather'
 import { UnitContext } from '../../../context/UnitContext'
 
 const Header = () => {
@@ -13,7 +14,8 @@ const Header = () => {
   const { unit, toggleUnit } = useContext(UnitContext)
   const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <Box
+    <Box 
+    id={'header'}
       pos={'fixed'}
       zIndex={'999'}
       p={1}
@@ -31,7 +33,7 @@ const Header = () => {
             </NextLink>
           </Box>
         )}
-        <Box p={4} bg={'blackAlpha.600'} >
+        <Box p={4} bg={'blackAlpha.600'}>
           <NextLink href={'/'} passHref>
             <Heading as={'a'} mx={'auto'} fontSize={['4xl', '6xl']} color={'white'}>
               Seasons

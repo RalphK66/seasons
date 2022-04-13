@@ -2,8 +2,6 @@
 export const ms_kmh = (ms) => {
   return ms * 3.6
 }
-
-
 // Pressure - imperial
 export const hpa_inhg = (hPa) => {
   return hPa * 0.0295

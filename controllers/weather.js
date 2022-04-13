@@ -11,43 +11,11 @@ import {
 import { FaCloudRain, FaSun, FaWind } from 'react-icons/fa'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
 import { RiContrastDrop2Line, RiDropLine } from 'react-icons/ri'
-import {
-  WiMoonAltFirstQuarter,
-  WiMoonAltFull,
-  WiMoonAltNew,
-  WiMoonAltThirdQuarter,
-  WiMoonAltWaningCrescent4,
-  WiMoonAltWaningGibbous4,
-  WiMoonAltWaxingCrescent4,
-  WiMoonAltWaxingGibbous4,
-} from 'react-icons/wi'
-import { UNIT, UNITS } from '../constants'
+import { UNIT, UNITS } from '../constants/weather'
 import { hpa_inhg, mm_Cm, mm_In, ms_kmh } from '../utils/convertions'
 import { shortDate, shortTime } from '../utils/dateTime'
 
 const iconProps = { size: 28 }
-
-const MoonIcon = ({ phase, props }) => {
-  if (phase === 0 || phase === 1) return <WiMoonAltNew {...props} />
-  if (phase > 0 && phase < 0.25) return <WiMoonAltWaxingCrescent4 {...props} />
-  if (phase === 0.25) return <WiMoonAltFirstQuarter {...props} />
-  if (phase > 0.25 && phase < 0.5) return <WiMoonAltWaxingGibbous4 {...props} />
-  if (phase === 0.5) return <WiMoonAltFull {...props} />
-  if (phase > 0.5 && phase < 0.75) return <WiMoonAltWaningGibbous4 {...props} />
-  if (phase === 0.75) return <WiMoonAltThirdQuarter {...props} />
-  if (phase > 0.75 && phase < 1) return <WiMoonAltWaningCrescent4 {...props} />
-}
-
-const MoonPhase = ({ phase }) => {
-  if (phase === 0 || phase === 1) return 'New Moon'
-  if (phase > 0 && phase < 0.25) return 'Waxing Crescent'
-  if (phase === 0.25) return 'First Quarter'
-  if (phase > 0.25 && phase < 0.5) return 'Waxing Gibbous'
-  if (phase === 0.5) return 'Full Moon'
-  if (phase > 0.5 && phase < 0.75) return 'Waning Gibbous'
-  if (phase === 0.75) return 'Third Quarter'
-  if (phase > 0.75 && phase < 1) return 'Waning Crescent'
-}
 
 const windDirSpd = ({ deg, speed }) => {
   const s = Math.round(speed)
@@ -83,7 +51,7 @@ const roundPrecipitation = (pop) => {
   return Math.ceil(pop / 5) * 5
 }
 
-const formatWeatherData = ({ weather, timezone, unit }) => {
+const processWeatherData = ({ weather, timezone, unit }) => {
   const dateTime = DateTime.fromSeconds(weather.dt, { zone: timezone })
 
   const temperature = (temp, unit) => {
@@ -268,32 +236,32 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
   }
 }
 
-export const formattedWeatherData = ({ metric, imperial }) => {
-  const currentMetric = formatWeatherData({
+export const processedWeatherData = ({ metric, imperial }) => {
+  const currentMetric = processWeatherData({
     weather: metric.current,
     timezone: metric.timezone,
     unit: UNIT.metric,
   })
-  const currentImperial = formatWeatherData({
+  const currentImperial = processWeatherData({
     weather: imperial.current,
     timezone: imperial.timezone,
     unit: UNIT.imperial,
   })
 
   const dailyMetric = metric.daily.map((day) =>
-    formatWeatherData({ weather: day, timezone: metric.timezone, unit: UNIT.metric })
+    processWeatherData({ weather: day, timezone: metric.timezone, unit: UNIT.metric })
   )
 
   const dailyImperial = imperial.daily.map((day) =>
-    formatWeatherData({ weather: day, timezone: imperial.timezone, unit: UNIT.imperial })
+    processWeatherData({ weather: day, timezone: imperial.timezone, unit: UNIT.imperial })
   )
 
   const hourlyMetric = metric.hourly.map((hour) =>
-    formatWeatherData({ weather: hour, timezone: metric.timezone, unit: UNIT.metric })
+    processWeatherData({ weather: hour, timezone: metric.timezone, unit: UNIT.metric })
   )
 
   const hourlyImperial = imperial.hourly.map((hour) =>
-    formatWeatherData({ weather: hour, timezone: imperial.timezone, unit: UNIT.imperial })
+    processWeatherData({ weather: hour, timezone: imperial.timezone, unit: UNIT.imperial })
   )
 
   return {

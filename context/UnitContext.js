@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-import { UNIT } from '../constants'
+import { UNIT } from '../constants/weather'
 
 export const UnitContext = createContext()
 

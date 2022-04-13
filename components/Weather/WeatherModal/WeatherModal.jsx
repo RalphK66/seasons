@@ -20,7 +20,7 @@ import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
 import Image from 'next/image'
 import { useContext } from 'react'
 import { UnitContext } from '../../../context/UnitContext'
-import { UNIT } from '../../../constants'
+import { UNIT } from '../../../constants/weather'
 
 const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = false }) => {
   const { unit, toggleUnit } = useContext(UnitContext)

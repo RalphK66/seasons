@@ -2,7 +2,6 @@ import { ChakraProvider, cookieStorageManager, localStorageManager } from '@chak
 import theme from '../theme'
 
 export const Chakra = ({ cookies, children }) => {
-  // b) Pass `colorModeManager` prop
   const colorModeManager =
     typeof cookies === 'string' ? cookieStorageManager(cookies) : localStorageManager
 
@@ -13,12 +12,10 @@ export const Chakra = ({ cookies, children }) => {
   )
 }
 
-// also export a reusable function getServerSideProps
 export const getServerSideProps = ({ req }) => {
   return {
     props: {
-      // first time users will not have any cookies and you may not return
-      // undefined here, hence ?? is necessary
+      // first time users will not have any cookies and you may not return undefined here, hence ?? is necessary
       cookies: req.headers.cookie ?? '',
     },
   }

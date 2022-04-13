@@ -1,44 +1,46 @@
 import axios from 'axios'
 import { useContext, useMemo } from 'react'
+import Head from 'next/head'
 import { Box, Divider, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
 import { UnitContext } from '../../context/UnitContext'
 import Weather from '../../components/Weather'
-import { formattedWeatherData } from '../../controllers/weather'
-import { UNIT } from '../../constants'
+import { processedWeatherData } from '../../controllers/weather'
+import { UNIT } from '../../constants/weather'
 
 const WeatherForecast = ({ weather, location }) => {
   const { unit } = useContext(UnitContext)
 
   const data = useMemo(
-    () => formattedWeatherData({ metric: weather.metric, imperial: weather.imperial }),
+    () => processedWeatherData({ metric: weather.metric, imperial: weather.imperial }),
     [weather]
   )
 
   return (
-    <Box w={'full'} textAlign={'center'}>
-      <Flex
-        mx={'auto'}
-        my={5}
-        p={5}
-        w={'fit-content'}
-        flexDir={'column'}
-        justify={'center'}
-        bg={useColorModeValue('aliceblue', 'black')}
-        shadow={'dark-lg'}
-        borderRadius={5}
-        transition={'background-color 0.3s ease-in-out'}>
-        <Heading>{location.main_text}</Heading>
-        <Text>{location.secondary_text}</Text>
-        <Divider my={2} borderColor={useColorModeValue('gray.500', 'gray.100')} />
-        <Text
-          fontWeight={'light'}
-          fontSize={'xs'}
-          color={useColorModeValue('gray.500', 'gray.100')}>
-          ( {location.lat}, {location.lng} )
-        </Text>
-      </Flex>
-      {weather && <Weather data={data[unit]} />}
-    </Box>
+    <>
+      <Head>
+        <title>Seasons | {location.main_text}</title>
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
+      </Head>
+      <Box w={'full'} textAlign={'center'}>
+        <Flex
+          mx={'auto'}
+          my={5}
+          p={5}
+          w={'fit-content'}
+          minW={'300px'}
+          flexDir={'column'}
+          justify={'center'}
+          bg={useColorModeValue('aliceblue', 'black')}
+          shadow={'dark-lg'}
+          borderRadius={5}
+          transition={'background-color 0.3s ease-in-out'}>
+          <Heading>{location.main_text}</Heading>
+          <Divider my={2} borderColor={useColorModeValue('gray.500', 'gray.100')} />
+          <Text>{location.secondary_text}</Text>
+        </Flex>
+        <Weather data={data[unit]} />
+      </Box>
+    </>
   )
 }
 
@@ -65,7 +67,7 @@ export const getServerSideProps = async (context) => {
     })
   )
   const [metric, imperial] = await Promise.all(requests)
-  console.log(metric.data.daily)
+
   const weather = { metric: metric.data, imperial: imperial.data }
 
   return { props: { weather, location } }

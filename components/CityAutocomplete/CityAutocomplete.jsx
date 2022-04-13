@@ -1,6 +1,13 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Box, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Input,
+  InputGroup,
+  InputRightElement,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import CityItem from './CityItem'
 
@@ -21,6 +28,9 @@ const PlacesAutocomplete = () => {
   const onChange = async (e) => {
     const { value } = e.target
     setQuery(value)
+    if (!value) {
+      setPredictions([])
+    }
   }
 
   return (
@@ -33,7 +43,7 @@ const PlacesAutocomplete = () => {
             placeholder={'Enter city...'}
             value={query}
             onChange={onChange}
-            _placeholder={{ color: 'red.500' }}
+            _placeholder={{ color: useColorModeValue('red.500', 'whiteAlpha.800') }}
             _focus={{ _placeholder: { color: 'whiteAlpha.800' } }}
           />
           <InputRightElement>

@@ -1,6 +1,6 @@
 import { Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
-import { DAY } from '../../../constants'
+import { DAY } from '../../../constants/weather'
 import Card from '../../Card'
 import WeatherModal from '../WeatherModal'
 
