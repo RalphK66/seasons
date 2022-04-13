@@ -1,4 +1,4 @@
-import { Text, Link, Center, Flex, Box } from '@chakra-ui/react'
+import { Box, Center, Flex, Link, Text } from '@chakra-ui/react'
 
 const Copyright = () => {
   return (

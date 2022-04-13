@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { useContext, useMemo } from 'react'
-import Head from 'next/head'
 import { Box, Divider, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
-import { UnitContext } from '../../context/UnitContext'
+import axios from 'axios'
+import Head from 'next/head'
+import { useContext, useMemo } from 'react'
 import Weather from '../../components/Weather'
-import { processedWeatherData } from '../../controllers/weather'
 import { UNIT } from '../../constants/weather'
+import { UnitContext } from '../../context/UnitContext'
+import { processedWeatherData } from '../../controllers/weather'
 
 const WeatherForecast = ({ weather, location }) => {
   const { unit } = useContext(UnitContext)

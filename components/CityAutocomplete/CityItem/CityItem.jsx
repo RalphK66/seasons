@@ -1,6 +1,6 @@
+import { Box, Text, useColorModeValue } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { Box, Text, useColorModeValue } from '@chakra-ui/react'
 
 const CityItem = ({ location }) => {
   const { place_id, structured_formatting } = location

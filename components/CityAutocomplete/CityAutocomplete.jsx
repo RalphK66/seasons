@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { CheckIcon } from '@chakra-ui/icons'
 import {
   Box,
   Flex,
@@ -8,7 +7,8 @@ import {
   InputRightElement,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { CheckIcon } from '@chakra-ui/icons'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import CityItem from './CityItem'
 
 const PlacesAutocomplete = () => {

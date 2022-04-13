@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
-import Nprogress from 'nprogress'
-import Router from 'next/router'
 import Head from 'next/head'
-import { Chakra } from '../src/Chakra'
-import UnitProvider from '../context/UnitContext'
+import Router from 'next/router'
+import Nprogress from 'nprogress'
+import { useEffect } from 'react'
 import Layout from '../components/Layout'
+import UnitProvider from '../context/UnitContext'
+import { Chakra } from '../src/Chakra'
 import '../styles/global.css'
 
 function App({ Component, pageProps }) {

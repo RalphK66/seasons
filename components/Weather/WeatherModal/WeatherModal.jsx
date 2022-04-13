@@ -16,11 +16,11 @@ import {
   Text,
   Tr,
 } from '@chakra-ui/react'
-import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
 import Image from 'next/image'
 import { useContext } from 'react'
-import { UnitContext } from '../../../context/UnitContext'
+import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
 import { UNIT } from '../../../constants/weather'
+import { UnitContext } from '../../../context/UnitContext'
 
 const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = false }) => {
   const { unit, toggleUnit } = useContext(UnitContext)

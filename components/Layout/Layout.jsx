@@ -1,8 +1,4 @@
-import { Box, Center, Fade, Flex, Spacer, useColorMode } from '@chakra-ui/react'
-import { useColorModeValue } from '@chakra-ui/react'
-import Image from 'next/image'
-import { HEADER_HEIGHT } from '../../constants'
-
+import { Flex, useColorMode } from '@chakra-ui/react'
 import Header from './Header/Header'
 import StickyFooter from './StickyFooter'
 
@@ -16,7 +12,6 @@ const Layout = ({ children }) => {
       <Header />
       <Flex
         as='main'
-        mt={HEADER_HEIGHT}
         flexDir={'column'}
         flex={1}
         align={'center'}

@@ -1,5 +1,4 @@
-import { Box, Flex, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react'
-import { isNewDay } from '../../../utils/dateTime'
+import { Flex, Heading, List, useColorModeValue } from '@chakra-ui/react'
 import Hour from './Hour'
 
 const Hourly = ({ data }) => {

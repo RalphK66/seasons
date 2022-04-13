@@ -1,17 +1,10 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  ListItem,
-  Spacer,
-  Text,
-  useColorModeValue,
-  WrapItem,
-} from '@chakra-ui/react'
+import { Box, Flex, Heading, ListItem, Text, useColorModeValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import { isNewDay } from '../../../../utils/dateTime'
+
 const Hour = ({ hour, isNow = false }) => {
   const dayTagBorderColor = useColorModeValue('black', 'white')
+
   return (
     <>
       {(isNewDay(hour.info.time) || isNow) && (

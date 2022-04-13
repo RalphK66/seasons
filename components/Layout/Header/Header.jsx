@@ -14,17 +14,15 @@ const Header = () => {
   const { unit, toggleUnit } = useContext(UnitContext)
   const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <Box 
-    id={'header'}
-      pos={'fixed'}
-      zIndex={'999'}
+    <Box
       p={1}
-      h={HEADER_HEIGHT}
+      h={[120, 150, 200, 240]}
       w={'100%'}
       bgImage="url('/images/seasons_banner.png')"
       bgPos='center'
       bgSize={'cover'}
-      bgRepeat='no-repeat'>
+      bgRepeat='no-repeat'
+      transition={'height 0.3s ease-in-out'}>
       <Flex pos={'relative'} align={'center'} justify={'center'} w={'100%'} h={'100%'}>
         {router.asPath !== '/' && (
           <Box pos={'absolute'} left={0} m={1}>

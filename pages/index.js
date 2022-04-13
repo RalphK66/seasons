@@ -1,4 +1,4 @@
-import { Wrapper, Status } from '@googlemaps/react-wrapper'
+import { Status, Wrapper } from '@googlemaps/react-wrapper'
 import CityAutocomplete from '../components/CityAutocomplete'
 import Loader from '../components/Loader'
 

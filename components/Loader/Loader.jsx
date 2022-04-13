@@ -1,5 +1,4 @@
-import { Flex, Spinner, useColorModeValue } from '@chakra-ui/react'
-import styles from './Loader.module.css'
+import { Flex, Spinner } from '@chakra-ui/react'
 
 const Loader = () => {
   return (
@@ -10,7 +9,7 @@ const Loader = () => {
       transform={'auto'}
       translateX='-50%'
       translateY='-50%'>
-      <Spinner w={'100px'} h={'100px'} size='xl' speed='1s' thickness='8px'  />
+      <Spinner w={'100px'} h={'100px'} size={'xl'} speed={'1s'} thickness={'8px'} />
     </Flex>
   )
 }
