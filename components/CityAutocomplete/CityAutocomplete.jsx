@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import { Box, Center, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import CityItem from './CityItem'
-import predictions from "../../data/cities.json"
-
+import predictions from '../../data/cities.json'
 
 const PlacesAutocomplete = () => {
   const [query, setQuery] = useState('')
@@ -27,7 +26,7 @@ const PlacesAutocomplete = () => {
 
   return (
     <Center>
-      <Flex flexDirection='column'>
+      <Flex flexDir='column'>
         <Box m={3}>
           <InputGroup>
             <Input

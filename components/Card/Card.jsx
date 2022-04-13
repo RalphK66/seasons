@@ -1,21 +1,21 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react'
 
-
-const Card = ({ children, bg=['white', 'black'] }) => {
+const Card = (props) => {
   return (
     <Flex
-      position={'relative'}
-      flexDirection={'column'}
+      pos={'relative'}
+      flexDir={'column'}
       m={4}
       p={4}
-      bg={useColorModeValue(bg[0], bg[1])}
       borderRadius={5}
+      bg={useColorModeValue('white', 'black')}
       textAlign={'center'}
-      maxWidth='500px'
       width='100%'
+      maxWidth={'500px'}
       height={'fit-content'}
-      shadow={'dark-lg'}>
-      {children}
+      shadow={'dark-lg'}
+      {...props}>
+      {props.children}
     </Flex>
   )
 }

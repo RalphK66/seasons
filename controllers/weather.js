@@ -1,15 +1,11 @@
 import { DateTime, Info } from 'luxon'
 import {
-  BsCalendarDay,
-  BsCalendarEvent,
-  BsChevronDoubleDown,
-  BsClock,
-  BsClouds,
+  BsChevronDoubleDown, BsClouds,
   BsPersonLinesFill,
   BsSnow,
   BsThermometerHalf,
   BsThermometerSnow,
-  BsThermometerSun,
+  BsThermometerSun
 } from 'react-icons/bs'
 import { FaCloudRain, FaSun, FaWind } from 'react-icons/fa'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
@@ -22,13 +18,13 @@ import {
   WiMoonAltWaningCrescent4,
   WiMoonAltWaningGibbous4,
   WiMoonAltWaxingCrescent4,
-  WiMoonAltWaxingGibbous4,
+  WiMoonAltWaxingGibbous4
 } from 'react-icons/wi'
 import { UNIT, UNITS } from '../constants'
-import { hpa_inhg, mm_In, ms_kmh, ms_mhr } from '../utils/convertions'
+import { hpa_inhg, mm_In, ms_kmh } from '../utils/convertions'
 import { shortDate, shortTime } from '../utils/dateTime'
 
-const iconProps = { size: 32 }
+const iconProps = { sm: 32 }
 
 const MoonIcon = ({ phase, props }) => {
   if (phase === 0 || phase === 1) return <WiMoonAltNew {...props} />
@@ -83,7 +79,7 @@ const UvIndex = ({ uvi }) => {
 }
 
 const roundPrecipitation = (pop) => {
-  return Math.round(pop / 5) * 5
+  return Math.ceil(pop / 5) * 5
 }
 
 const formatWeatherData = ({ weather, timezone, unit }) => {
@@ -205,6 +201,7 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
         }
       : {}
   }
+
 
   return {
     info: {

@@ -1,36 +1,27 @@
-import {
-  Box,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  SimpleGrid,
-  Spacer,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react'
-import Image from 'next/image'
-import Weekday from './Weekday/Weekday'
+import { Flex, Heading, useColorModeValue, Wrap } from '@chakra-ui/react'
+import Weekday from './Weekday'
 
 const Week = ({ data }) => {
   return (
     <Flex
-      flexDirection={'column'}
-      m={4}
+      flexDir={'column'}
+      p={4}
+      my={5}
+      mx={2}
       bg={useColorModeValue('white', 'black')}
       borderRadius={5}
       textAlign={'center'}
       maxWidth='1032px'
-      // minWidth='468px'
+      width={'100%'}
       shadow={'dark-lg'}>
-      <Heading my={4}>Rest of the Week</Heading>
-      <Box overflowX={'scroll'} bg={'transparent'} m={2}>
-        <SimpleGrid columns={3} spacing={1} m={2}>
-          {data.slice(2).map((day, idx) => (
-            <Weekday key={idx} day={day} />
-          ))}
-        </SimpleGrid>
-      </Box>
+      <Heading size={'md'} mb={4}>
+        WEEKLY
+      </Heading>
+      <Wrap spacing={[1, 2, 3, 4]} justify={'center'}>
+        {data.map((day, idx) => (
+          <Weekday key={idx} day={day} isToday={idx === 0} />
+        ))}
+      </Wrap>
     </Flex>
   )
 }

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { UNIT, UNITS } from '../constants'
+import { UNIT } from '../constants'
 
 export const convertSecToHMS = (sec) => {
   if (sec === 0) return { sign: '', hours: 0, minutes: 0, seconds: 0 }

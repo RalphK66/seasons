@@ -6,11 +6,7 @@ import StickyFooter from './StickyFooter'
 
 const Layout = ({ children }) => {
   return (
-    <Flex
-      flexDirection={'column'}
-      minHeight='100vh'
-      w='100%'
-      bg={useColorModeValue('blue.500', 'blue.1000')}>
+    <Flex flexDir={'column'} minHeight='100vh' w='100%'>
       <Header />
       <Flex align={'center'} justifyItems={'center'}>
         {children}

@@ -1,39 +1,60 @@
-import { Box, Divider, Flex, Heading, Spacer, Text,useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  WrapItem,
+} from '@chakra-ui/react'
 import Image from 'next/image'
+import WeatherModal from '../../WeatherModal'
 
-const Weekday = ({ day }) => {
+const Weekday = ({ day, isToday = false }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const maxTempColor = useColorModeValue('blue.600', 'blue.200')
-  // const dividerColor = useColorModeValue('gray.800', 'gray.500')
+
   return (
-    <Flex w={'100%'} borderRadius={5} shadow={'lg'}>
-      <Box w={'100%'}>
-        <Flex flexDirection={'column'} p={4}>
-          <Flex align={'center'}>
-            <Text fontSize={'sm'} fontWeight={'bold'}>{day.info.weekday.short}</Text>
-            <Spacer />
-            <Text fontSize={'sm'}>{day.info.short_date}</Text>
+    <WrapItem onClick={onOpen} role='button'>
+      <Flex
+        w={'100%'}
+        borderRadius={5}
+        shadow={'md'}
+        borderWidth={1}
+        borderColor={'rgba(255, 255, 255, 0.24)'}>
+        <Box w={'100%'}>
+          <Flex flexDir={'column'} p={4}>
+            <Flex align={'center'}>
+              <Text fontSize={'sm'} fontWeight={'bold'}>
+                {isToday ? 'Today' : day.info.weekday.short}
+              </Text>
+              <Spacer />
+              <Text fontSize={'sm'}>{day.info.short_date}</Text>
+            </Flex>
+            <Flex flexDir={'column'} justify={'center'} mt={2}>
+              <Heading size={'md'} color={maxTempColor}>
+                {day.weather.max.value}
+                {day.weather.max.unit}
+              </Heading>
+              <Text fontSize={'sm'}>
+                {day.weather.min.value}
+                {day.weather.min.unit}
+              </Text>
+            </Flex>
+            <Flex justify={'center'}>
+              <Image
+                src={day.info.description.iconUrl}
+                alt={'weather icon'}
+                width={72}
+                height={72}
+              />
+            </Flex>
           </Flex>
-          <Flex flexDirection={'column'} justify={'center'} mt={2}>
-            <Heading size={'md'} color={maxTempColor}>
-              {day.weather.max.value}
-              {day.weather.max.unit}
-            </Heading>
-            <Text fontSize={'sm'}>
-              {day.weather.min.value}
-              {day.weather.min.unit}
-            </Text>
-          </Flex>
-          <Flex justify={'center'}>
-            <Image src={day.info.description.iconUrl} alt='weather icon' width={72} height={72} />
-          </Flex>
-        </Flex>
-      </Box>
-      {/* {(idx + 1) % 3 !== 0 && (
-        <Box mx={2} py={2}>
-          <Divider orientation={'vertical'} borderColor={dividerColor} />
         </Box>
-      )} */}
-    </Flex>
+      </Flex>
+      <WeatherModal day={day} isOpen={isOpen} onClose={onClose} />
+    </WrapItem>
   )
 }
 

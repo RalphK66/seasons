@@ -23,4 +23,4 @@ export const UNITS = {
   },
 }
 
-export const DAY = { 0: 'today', 1: 'tomorrow', 2: 'nextDay' }
+export const DAY = { 0: 'today', 1: 'tomorrow' }

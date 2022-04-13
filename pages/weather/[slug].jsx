@@ -1,44 +1,46 @@
-import { Box, Button, Flex } from '@chakra-ui/react'
-import { useMemo, useState } from 'react'
-import Day from '../../components/Weather/Day'
-import Hourly from '../../components/Weather/Hourly'
-import Week from '../../components/Weather/Week/Week'
-import { UNIT } from '../../constants'
+import { useContext, useMemo } from 'react'
+import { Box, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
+import { UnitContext } from '../../context/UnitContext'
+import Weather from '../../components/Weather'
 import { formattedWeatherData } from '../../controllers/weather'
 import readFile from '../../utils/readFile'
 
-const Weather = ({ weather, location }) => {
-  const [unit, setUnits] = useState(UNIT.metric)
+const WeatherForecast = ({ weather, location }) => {
+  const { unit } = useContext(UnitContext)
 
-  const toggleUnits = () => setUnits((prev) => (prev === UNIT.metric ? UNIT.imperial : UNIT.metric))
-
-  const { metric, imperial } = useMemo(
+  const data = useMemo(
     () => formattedWeatherData({ metric: weather.metric, imperial: weather.imperial }),
     [weather]
   )
 
   return (
-    <>
-      <Box w={'full'}>
-        <Button onClick={toggleUnits}>{unit}</Button>
-        <Box>
-          <Flex flexWrap={'wrap'} justify={'center'}>
-            <Day data={unit === UNIT.metric ? metric.daily[0] : imperial.daily[0]} day={0} />
-            <Day data={unit === UNIT.metric ? metric.daily[1] : imperial.daily[0]} day={1} />
-          </Flex>
-          <Flex justify={'center'} m={4}>
-            <Week data={unit === UNIT.metric ? metric.daily : imperial.daily} />
-          </Flex>
-          <Flex justify={'center'} m={4}>
-            <Hourly data={unit === UNIT.metric ? metric.hourly : imperial.hourly} />
-          </Flex>
-        </Box>
-      </Box>
-    </>
+    <Box w={'full'} textAlign={'center'}>
+      <Flex
+        mx={'auto'}
+        mt={5}
+        p={5}
+        w={'fit-content'}
+        flexDir={'column'}
+        justify={'center'}
+        bg={useColorModeValue('white', 'black')}
+        shadow={'dark-lg'}
+        borderRadius={5}>
+        <Heading>
+          {location.main_text} - {location.secondary_text}
+        </Heading>
+        <Text
+          fontWeight={'light'}
+          fontSize={'xs'}
+          color={useColorModeValue('gray.500', 'gray.100')}>
+          ( {location.lat}, {location.lng} )
+        </Text>
+      </Flex>
+      {weather && <Weather data={data[unit]} />}
+    </Box>
   )
 }
 
-export default Weather
+export default WeatherForecast
 
 export const getServerSideProps = async (context) => {
   const { lat, lng, main_text, secondary_text } = context.query

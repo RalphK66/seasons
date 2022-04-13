@@ -16,7 +16,7 @@ const StickyFooter = () => {
   return (
     <Box mt={'auto'}>
       <Center p={5}>
-        <Flex flexDirection={'column'} align={'center'}>
+        <Flex flexDir={'column'} align={'center'}>
           <Copyright />
         </Flex>
       </Center>
