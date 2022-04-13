@@ -143,11 +143,13 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
   }
 
   const rain = (rain, unit) => {
+    if (!rain) return {}
+    const amount = Math.round(rain)
     return rain
       ? {
           rain: {
             name: 'Rain',
-            value: rain,
+            value: amount < 1 ? '< 1' : amount,
             unit: unit,
             icon: <FaCloudRain {...iconProps} />,
           },
