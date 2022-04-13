@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, IconButton, useColorMode } from '@chakra-ui/react'
+import { Box, Flex, Heading, IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -15,10 +15,10 @@ const Header = () => {
   return (
     <Box
       p={1}
-      h={'150px'}
+      h={'200px'}
       w={'100%'}
       bgImage="url('/images/seasons_banner.png')"
-      bgpos='center'
+      bgPos='center'
       bgSize={'cover'}
       bgRepeat='no-repeat'>
       <Flex pos={'relative'} align='center' justify={'center'} w={'100%'} h={'100%'}>
@@ -29,9 +29,9 @@ const Header = () => {
             </NextLink>
           </Box>
         )}
-        <Box p={4} bg={'whiteAlpha.50'} shadow={'dark-lg'}>
+        <Box px={4} bg={'whiteAlpha.300'} shadow={'dark-lg'}>
           <NextLink href={'/'} passHref>
-            <Heading as={'a'} mx={'auto'} fontSize={'6xl'} color={'white'}>
+            <Heading as={'a'} mx={'auto'} fontSize={['4xl', '6xl']} color={'white'}>
               Seasons
             </Heading>
           </NextLink>

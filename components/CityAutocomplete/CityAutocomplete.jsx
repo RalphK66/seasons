@@ -25,29 +25,27 @@ const PlacesAutocomplete = () => {
   }
 
   return (
-    <Center>
-      <Flex flexDir='column'>
-        <Box m={3}>
-          <InputGroup>
-            <Input
-              size='lg'
-              variant='flushed'
-              placeholder='Enter city...'
-              value={query}
-              onChange={onChange}
-            />
-            <InputRightElement>
-              {predictions?.length > 0 && <CheckIcon color='green.500' />}
-            </InputRightElement>
-          </InputGroup>
-        </Box>
-        <Box m={3} p={1}>
-          {predictions?.map((prediction, idx) => (
-            <CityItem key={idx} location={prediction} />
-          ))}
-        </Box>
-      </Flex>
-    </Center>
+    <Flex p={4} m={4} mb={'auto'} flexDir={'column'}>
+      <Box m={3}>
+        <InputGroup>
+          <Input
+            size={'lg'}
+            variant={'flushed'}
+            placeholder={'Enter city...'}
+            value={query}
+            onChange={onChange}
+          />
+          <InputRightElement>
+            {query && predictions?.length > 0 && <CheckIcon color={'green.500'} />}
+          </InputRightElement>
+        </InputGroup>
+      </Box>
+      <Box m={3} p={1}>
+        {predictions?.map((prediction, idx) => (
+          <CityItem key={idx} location={prediction} />
+        ))}
+      </Box>
+    </Flex>
   )
 }
 

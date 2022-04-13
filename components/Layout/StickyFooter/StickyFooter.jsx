@@ -2,7 +2,7 @@ import { Text, Link, Center, Flex, Box } from '@chakra-ui/react'
 
 const Copyright = () => {
   return (
-    <Text>
+    <Text color={'gray'} >
       {'Copyright © '}
       <Link color='blue.200' href='https://ralphkilian.ca/'>
         Ralph Kilian
@@ -14,9 +14,9 @@ const Copyright = () => {
 
 const StickyFooter = () => {
   return (
-    <Box mt={'auto'}>
-      <Center p={5}>
-        <Flex flexDir={'column'} align={'center'}>
+    <Box bg={'transparent'}>
+      <Center p={5} >
+        <Flex flexDir={'column'} align={'center'} >
           <Copyright />
         </Flex>
       </Center>

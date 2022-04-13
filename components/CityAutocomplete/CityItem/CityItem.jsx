@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import location from '../../../data/location.json'
 import data from '../../../data/geoLocation.json'
+import { Text } from '@chakra-ui/react'
 
 // const CityItem = ({ location }) => {
 const CityItem = () => {
@@ -25,14 +26,14 @@ const CityItem = () => {
   }
 
   return (
-    <>
-      <div onClick={handleLocationSelect} style={{ display: 'flex' }}>
-        <div>
-          <strong>{main_text}, </strong>
-          {secondary_text}
-        </div>
-      </div>
-    </>
+    <Text
+      onClick={handleLocationSelect}
+      role={'button'}
+      my={1}
+      _hover={{ color: 'blue.400' }}
+      transition={'color 0.3s ease'}>
+      {main_text}, {secondary_text}
+    </Text>
   )
 }
 

@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react'
-import { Box, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
 import { UnitContext } from '../../context/UnitContext'
 import Weather from '../../components/Weather'
 import { formattedWeatherData } from '../../controllers/weather'
@@ -17,7 +17,7 @@ const WeatherForecast = ({ weather, location }) => {
     <Box w={'full'} textAlign={'center'}>
       <Flex
         mx={'auto'}
-        mt={5}
+        my={5}
         p={5}
         w={'fit-content'}
         flexDir={'column'}
@@ -25,9 +25,9 @@ const WeatherForecast = ({ weather, location }) => {
         bg={useColorModeValue('white', 'black')}
         shadow={'dark-lg'}
         borderRadius={5}>
-        <Heading>
-          {location.main_text} - {location.secondary_text}
-        </Heading>
+        <Heading>{location.main_text}</Heading>
+        <Text>{location.secondary_text}</Text>
+        <Divider my={2} borderColor={useColorModeValue('gray.500', 'gray.100')} />
         <Text
           fontWeight={'light'}
           fontSize={'xs'}

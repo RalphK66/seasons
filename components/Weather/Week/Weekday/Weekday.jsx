@@ -3,17 +3,15 @@ import {
   Flex,
   Heading,
   Spacer,
-  Text,
-  useColorModeValue,
-  useDisclosure,
-  WrapItem,
+  Text, useDisclosure,
+  WrapItem
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import WeatherModal from '../../WeatherModal'
 
 const Weekday = ({ day, isToday = false }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const maxTempColor = useColorModeValue('blue.600', 'blue.200')
+
 
   return (
     <WrapItem onClick={onOpen} role='button'>
@@ -33,11 +31,11 @@ const Weekday = ({ day, isToday = false }) => {
               <Text fontSize={'sm'}>{day.info.short_date}</Text>
             </Flex>
             <Flex flexDir={'column'} justify={'center'} mt={2}>
-              <Heading size={'md'} color={maxTempColor}>
+              <Heading size={'md'} color={'red.400'}>
                 {day.weather.max.value}
                 {day.weather.max.unit}
               </Heading>
-              <Text fontSize={'sm'}>
+              <Text fontSize={'sm'} color={'blue.400'}>
                 {day.weather.min.value}
                 {day.weather.min.unit}
               </Text>

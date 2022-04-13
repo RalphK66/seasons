@@ -14,7 +14,8 @@ const Card = (props) => {
       maxWidth={'500px'}
       height={'fit-content'}
       shadow={'dark-lg'}
-      {...props}>
+      {...props}
+      transition={'background-color 0.3s ease-in-out'}>
       {props.children}
     </Flex>
   )
