@@ -7,7 +7,7 @@ const Card = (props) => {
       m={4}
       p={4}
       borderRadius={5}
-      bg={useColorModeValue('white', 'black')}
+      bg={useColorModeValue('aliceblue', 'black')}
       textAlign={'center'}
       width='100%'
       maxWidth={'500px'}

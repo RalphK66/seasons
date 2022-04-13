@@ -48,3 +48,7 @@ export const shortDate = ({ dateTime, unit }) => {
   const date = [dateTime.day, dateTime.month]
   return unit === UNIT.metric ? date.join('/') : date.reverse().join('/')
 }
+
+export const isNewDay = (hour) => {
+  return hour === ('00:00' || '00:00 AM')
+}

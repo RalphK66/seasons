@@ -31,7 +31,7 @@ const Header = () => {
             </NextLink>
           </Box>
         )}
-        <Box px={4} bg={'whiteAlpha.300'} shadow={'dark-lg'}>
+        <Box p={4} bg={'blackAlpha.600'} >
           <NextLink href={'/'} passHref>
             <Heading as={'a'} mx={'auto'} fontSize={['4xl', '6xl']} color={'white'}>
               Seasons

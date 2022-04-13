@@ -1,11 +1,12 @@
 import { DateTime, Info } from 'luxon'
 import {
-  BsChevronDoubleDown, BsClouds,
+  BsChevronDoubleDown,
+  BsClouds,
   BsPersonLinesFill,
   BsSnow,
   BsThermometerHalf,
   BsThermometerSnow,
-  BsThermometerSun
+  BsThermometerSun,
 } from 'react-icons/bs'
 import { FaCloudRain, FaSun, FaWind } from 'react-icons/fa'
 import { FiSunrise, FiSunset } from 'react-icons/fi'
@@ -18,13 +19,13 @@ import {
   WiMoonAltWaningCrescent4,
   WiMoonAltWaningGibbous4,
   WiMoonAltWaxingCrescent4,
-  WiMoonAltWaxingGibbous4
+  WiMoonAltWaxingGibbous4,
 } from 'react-icons/wi'
 import { UNIT, UNITS } from '../constants'
-import { hpa_inhg, mm_In, ms_kmh } from '../utils/convertions'
+import { hpa_inhg, mm_Cm, mm_In, ms_kmh } from '../utils/convertions'
 import { shortDate, shortTime } from '../utils/dateTime'
 
-const iconProps = { sm: 32 }
+const iconProps = { size: 28 }
 
 const MoonIcon = ({ phase, props }) => {
   if (phase === 0 || phase === 1) return <WiMoonAltNew {...props} />
@@ -142,13 +143,11 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
   }
 
   const rain = (rain, unit) => {
-    const isString = rain && typeof rain === 'string'
-    const amount = unit === UNIT.metric ? snow : mm_In(snow)
-    return isString
+    return rain
       ? {
           rain: {
             name: 'Rain',
-            value: amount,
+            value: rain,
             unit: unit,
             icon: <FaCloudRain {...iconProps} />,
           },
@@ -157,18 +156,16 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
   }
 
   const snow = (snow, unit) => {
-    const isString = snow && typeof snow === 'string'
-    const amount = unit === UNIT.metric ? snow : mm_In(snow)
-    return isString
-      ? {
-          snow: {
-            name: 'Snow',
-            value: amount,
-            unit: unit,
-            icon: <BsSnow {...iconProps} />,
-          },
-        }
-      : {}
+    if (!snow) return {}
+    const amount = unit === UNIT.metric ? Math.round(mm_Cm(snow)) : Math.round(mm_In(snow))
+    return {
+      snow: {
+        name: 'Snow',
+        value: amount < 1 ? '< 1' : amount,
+        unit: unit,
+        icon: <BsSnow {...iconProps} />,
+      },
+    }
   }
 
   const sunrise = ({ sunrise, unit }) => {
@@ -202,7 +199,6 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
       : {}
   }
 
-
   return {
     info: {
       date: dateTime.toLocaleString(DateTime.DATE_FULL),
@@ -210,7 +206,7 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
       time: shortTime({ dateTime, unit }),
       weekday: {
         short: Info.weekdays('short')[(dateTime.weekday + 6) % 7],
-        long:Info.weekdays('long')[(dateTime.weekday + 6) % 7],
+        long: Info.weekdays('long')[(dateTime.weekday + 6) % 7],
       },
       description: {
         title: weather.weather[0].main,
@@ -264,8 +260,8 @@ const formatWeatherData = ({ weather, timezone, unit }) => {
         unit: UNITS[unit].temp,
         icon: <RiDropLine {...iconProps} />,
       },
-      ...sunrise({ sunrise: weather.sunrise ?? undefined, timezone: timezone, unit: UNITS[unit] }),
-      ...sunset({ sunset: weather.sunset ?? undefined, timezone: timezone, unit: UNITS[unit] }),
+      ...sunrise({ sunrise: weather.sunrise ?? undefined, timezone: timezone, unit: unit }),
+      ...sunset({ sunset: weather.sunset ?? undefined, timezone: timezone, unit: unit }),
     },
   }
 }

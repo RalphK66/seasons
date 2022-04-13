@@ -1,16 +1,31 @@
-import { Text, Wrap, WrapItem } from "@chakra-ui/react"
+import { Box, Flex, Heading, List, ListItem, Text, useColorModeValue } from '@chakra-ui/react'
+import { isNewDay } from '../../../utils/dateTime'
+import Hour from './Hour'
 
-
-const Hourly = ({data}) => {
-  return <Wrap >
-    {data.map((hr, idx, arr) => 
-    <WrapItem key={idx}>
-      <Text>{hr.info.time}</Text>
-    </WrapItem>
-    )}
-
-  </Wrap>
+const Hourly = ({ data }) => {
+  return (
+    <Flex
+      flexDir={'column'}
+      p={4}
+      my={5}
+      mx={2}
+      bg={useColorModeValue('white', 'black')}
+      borderRadius={5}
+      textAlign={'center'}
+      maxWidth={'500px'}
+      width={'100%'}
+      shadow={'dark-lg'}
+      transition={'background-color 0.3s ease-in-out'}>
+      <Heading size={'md'} mb={4}>
+        HOURLY
+      </Heading>
+      <List align='stretch'>
+        {data.map((hour, idx) => (
+          <Hour key={idx} hour={hour} isNow={idx === 0} />
+        ))}
+      </List>
+    </Flex>
+  )
 }
 
 export default Hourly
-

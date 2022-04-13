@@ -1,6 +1,7 @@
 import {
   Flex,
   Heading,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -15,21 +16,25 @@ import {
   Text,
   Tr,
 } from '@chakra-ui/react'
+import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri'
 import Image from 'next/image'
+import { useContext } from 'react'
+import { UnitContext } from '../../../context/UnitContext'
+import { UNIT } from '../../../constants'
 
 const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = false }) => {
+  const { unit, toggleUnit } = useContext(UnitContext)
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       isCentered
       size={'xl'}
-      blockScrollOnMount={false}
       closeOnOverlayClick={false}
       scrollBehavior={'inside'}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>
+        <ModalHeader p={0} mt={4} pr={4}>
           <Flex align={'center'}>
             <Image
               src={day.info.description.iconUrl}
@@ -45,18 +50,25 @@ const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = fals
                 {day.info.date}
               </Heading>
             </Flex>
+            <Spacer />
+            <Flex>
+              <IconButton
+                onClick={toggleUnit}
+                icon={unit === UNIT.metric ? <RiFahrenheitFill /> : <RiCelsiusFill />}
+              />
+            </Flex>
           </Flex>
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton size={'lg'} color={'red.500'} />
         <ModalBody>
-          <TableContainer>
-            <Table variant='simple' size={['sm', 'md']}>
+          <TableContainer mb={4}>
+            <Table variant='simple' size={'md'}>
               <Tbody>
                 {Object.values(day.weather).map((el, idx) => {
                   return (
                     <Tr key={idx}>
                       <Td>
-                        <Flex gap={3} align={'center'}>
+                        <Flex gap={5} align={'center'}>
                           {el.icon}
                           {el.name}
                         </Flex>

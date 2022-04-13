@@ -3,8 +3,10 @@ import {
   Flex,
   Heading,
   Spacer,
-  Text, useDisclosure,
-  WrapItem
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  WrapItem,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import WeatherModal from '../../WeatherModal'
@@ -12,11 +14,12 @@ import WeatherModal from '../../WeatherModal'
 const Weekday = ({ day, isToday = false }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
   return (
     <WrapItem onClick={onOpen} role='button'>
       <Flex
         w={'100%'}
+        bg={useColorModeValue('white', 'black')}
+        transition={'background-color 0.3s ease-in-out'}
         borderRadius={5}
         shadow={'md'}
         borderWidth={1}

@@ -1,23 +1,22 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Box, Center, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Box, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import CityItem from './CityItem'
-import predictions from '../../data/cities.json'
 
 const PlacesAutocomplete = () => {
   const [query, setQuery] = useState('')
-  // const [predictions, setPredictions] = useState(null)
+  const [predictions, setPredictions] = useState(null)
 
-  // useEffect(() => {
-  //   const autoComplete = async () => {
-  //     const { data } = await axios.get('/api/places', { params: { query } })
-  //     setPredictions(data.predictions)
-  //   }
-  //   if (query) {
-  //     autoComplete()
-  //   }
-  // }, [query])
+  useEffect(() => {
+    const autoComplete = async () => {
+      const { data } = await axios.get('/api/places', { params: { query } })
+      setPredictions(data.predictions)
+    }
+    if (query) {
+      autoComplete()
+    }
+  }, [query])
 
   const onChange = async (e) => {
     const { value } = e.target
@@ -25,8 +24,8 @@ const PlacesAutocomplete = () => {
   }
 
   return (
-    <Flex p={4} m={4} mb={'auto'} flexDir={'column'}>
-      <Box m={3}>
+    <Flex p={4} m={4} mb={'auto'} flexDir={'column'} minH={'260px'} minW={'365px'}>
+      <Box m={4} p={4} borderRadius={5} bg={'whiteAlpha.300'} shadow={'dark-lg'}>
         <InputGroup>
           <Input
             size={'lg'}
@@ -34,19 +33,23 @@ const PlacesAutocomplete = () => {
             placeholder={'Enter city...'}
             value={query}
             onChange={onChange}
+            _placeholder={{ color: 'red.500' }}
+            _focus={{ _placeholder: { color: 'whiteAlpha.800' } }}
           />
           <InputRightElement>
             {query && predictions?.length > 0 && <CheckIcon color={'green.500'} />}
           </InputRightElement>
         </InputGroup>
-      </Box>
-      <Box m={3} p={1}>
-        {predictions?.map((prediction, idx) => (
-          <CityItem key={idx} location={prediction} />
-        ))}
+        <Box m={3} p={1}>
+          {predictions?.map((prediction, idx) => (
+            <CityItem key={idx} location={prediction} />
+          ))}
+        </Box>
       </Box>
     </Flex>
   )
 }
 
 export default PlacesAutocomplete
+
+// import predictions from '../../testData/cities.json'

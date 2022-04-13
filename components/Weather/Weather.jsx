@@ -1,6 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react'
 import Day from './Day'
 import Week from './Week'
+import Hourly from './Hourly'
 
 const Weather = ({ data }) => {
   return (
@@ -12,9 +13,10 @@ const Weather = ({ data }) => {
       <Flex justify={'center'} m={4}>
         <Week data={data.daily} />
       </Flex>
-      <Flex justify={'center'} m={4}>
-        {/* <Hourly data={data} /> */}
-      </Flex>
+
+      {/* <Flex justify={'center'} m={4}>
+        <Hourly data={data.hourly} />
+      </Flex> */}
     </Box>
   )
 }

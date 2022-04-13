@@ -1,7 +1,6 @@
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
-
 import CityAutocomplete from '../components/CityAutocomplete'
-import Loader from '../components/Loader/Loader'
+import Loader from '../components/Loader'
 
 const Home = () => {
   const render = (status) => {

@@ -8,7 +8,7 @@ const Week = ({ data }) => {
       p={4}
       my={5}
       mx={2}
-      bg={useColorModeValue('white', 'black')}
+      bg={useColorModeValue('aliceblue', 'black')}
       borderRadius={5}
       textAlign={'center'}
       maxWidth='1032px'

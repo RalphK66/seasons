@@ -1,9 +1,10 @@
+import axios from 'axios'
 import { useContext, useMemo } from 'react'
 import { Box, Divider, Flex, Heading, Text, useColorModeValue } from '@chakra-ui/react'
 import { UnitContext } from '../../context/UnitContext'
 import Weather from '../../components/Weather'
 import { formattedWeatherData } from '../../controllers/weather'
-import readFile from '../../utils/readFile'
+import { UNIT } from '../../constants'
 
 const WeatherForecast = ({ weather, location }) => {
   const { unit } = useContext(UnitContext)
@@ -22,7 +23,7 @@ const WeatherForecast = ({ weather, location }) => {
         w={'fit-content'}
         flexDir={'column'}
         justify={'center'}
-        bg={useColorModeValue('white', 'black')}
+        bg={useColorModeValue('aliceblue', 'black')}
         shadow={'dark-lg'}
         borderRadius={5}
         transition={'background-color 0.3s ease-in-out'}>
@@ -44,40 +45,39 @@ const WeatherForecast = ({ weather, location }) => {
 export default WeatherForecast
 
 export const getServerSideProps = async (context) => {
-  const { lat, lng, main_text, secondary_text } = context.query
-  const location = { lat, lng, main_text, secondary_text }
-  const weather = await readFile({ dir: process.cwd(), paths: ['data', 'vancouver.json'] })
+  context.res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=3600')
 
-  return {
-    props: { weather, location },
-  }
+  const { lat, lng, main_text, secondary_text } = context.query
+
+  const location = { lat, lng, main_text, secondary_text }
+
+  const requests = Object.values(UNIT).map((unit) =>
+    axios({
+      method: 'GET',
+      url: process.env.OPENWEATHER_ONECALL_URL,
+      params: {
+        lat: lat,
+        lon: lng,
+        appid: process.env.OPENWEATHER_API_KEY,
+        units: unit,
+        exclude: 'minutely,alerts',
+      },
+    })
+  )
+  const [metric, imperial] = await Promise.all(requests)
+  console.log(metric.data.daily)
+  const weather = { metric: metric.data, imperial: imperial.data }
+
+  return { props: { weather, location } }
 }
 
+// import readFile from '../../utils/readFile'
 // export const getServerSideProps = async (context) => {
-// context.res.setHeader(
-//   'Cache-Control',
-//   'public, s-maxage=3600, stale-while-revalidate=3600'
-// )
-
 //   const { lat, lng, main_text, secondary_text } = context.query
-
 //   const location = { lat, lng, main_text, secondary_text }
+//   const weather = await readFile({ dir: process.cwd(), paths: ['testData', 'vancouver.json'] })
 
-//   const requests = Object.values(UNIT).map((unit) =>
-//     axios({
-//       method: 'GET',
-//       url: process.env.OPENWEATHER_ONECALL_URL,
-//       params: {
-//         lat: lat,
-//         lon: lng,
-//         appid: process.env.OPENWEATHER_API_KEY,
-//         units: unit,
-//         exclude: 'minutely,alerts'
-//       },
-//     })
-//   )
-//   const [metric, imperial] = await Promise.all(requests)
-//   const weather = { metric: metric.data, imperial: imperial.data }
-
-//   return { props: { weather, location } }
+//   return {
+//     props: { weather, location },
+//   }
 // }

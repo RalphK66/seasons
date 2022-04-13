@@ -1,20 +1,15 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import location from '../../../data/location.json'
-import data from '../../../data/geoLocation.json'
-import { Text } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue } from '@chakra-ui/react'
 
-// const CityItem = ({ location }) => {
-const CityItem = () => {
-  const {
-    place_id,
-    structured_formatting: { main_text, secondary_text },
-  } = location
+const CityItem = ({ location }) => {
+  const { place_id, structured_formatting } = location
+  const { main_text, secondary_text } = structured_formatting
 
   const router = useRouter()
 
   const handleLocationSelect = async () => {
-    // const { data } = await axios.get('/api/geocode', { params: { place_id } })
+    const { data } = await axios.get('/api/geocode', { params: { place_id } })
     const { lat, lng } = data
 
     const slug = main_text.replace(' ', '_')
@@ -26,15 +21,21 @@ const CityItem = () => {
   }
 
   return (
-    <Text
-      onClick={handleLocationSelect}
+    <Box
+      p={1.5}
+      borderRadius={5}
+      _hover={{ color: 'green.600', bg: useColorModeValue('whiteAlpha.600', 'blackAlpha.600') }}
+      transition={'all 0.3s ease'}
       role={'button'}
-      my={1}
-      _hover={{ color: 'blue.400' }}
-      transition={'color 0.3s ease'}>
-      {main_text}, {secondary_text}
-    </Text>
+      onClick={handleLocationSelect}>
+      <Text>
+        {main_text}, {secondary_text}
+      </Text>
+    </Box>
   )
 }
 
 export default CityItem
+
+// import location from '../../../testData/location.json'
+// import data from '../../../testData/geoLocation.json'

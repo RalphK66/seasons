@@ -11,6 +11,8 @@ export const UNITS = {
     precipitation: '%',
     clouds: '%',
     humidity: '%',
+    rain: 'mm',
+    snow: 'cm'
   },
   imperial: {
     temp: 'º',
@@ -20,6 +22,8 @@ export const UNITS = {
     precipitation: '%',
     clouds: '%',
     humidity: '%',
+    rain: 'mm',
+    snow: 'in'
   },
 }
 

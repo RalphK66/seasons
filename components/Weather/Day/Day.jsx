@@ -1,4 +1,4 @@
-import { Flex, Heading, Spacer, Text, useDisclosure, useColorModeValue } from '@chakra-ui/react'
+import { Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
 import { DAY } from '../../../constants'
 import Card from '../../Card'
@@ -17,8 +17,8 @@ const Day = ({ data, day }) => {
           <Spacer />
           <Text>{data.info.short_date}</Text>
         </Flex>
-        <Flex align={'center'} justifyContent={'center'} >
-          <Image src={iconUrl} alt={'weather icon'} width={128} height={128}  />
+        <Flex align={'center'} justifyContent={'center'}>
+          <Image src={iconUrl} alt={'weather icon'} width={128} height={128} />
           <Flex align={'baseline'} gap={3}>
             <Heading size={'4xl'} color={'red.400'}>
               {data.weather.max.value}
