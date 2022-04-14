@@ -7,3 +7,13 @@ body {
 #nprogress {
   z-index: 2000;
 }
+
+@media (max-width: 575.98px) {
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}

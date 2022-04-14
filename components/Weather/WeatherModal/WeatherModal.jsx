@@ -63,7 +63,7 @@ const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = fals
           </Flex>
         </ModalHeader>
         <ModalCloseButton size={'lg'} color={'red.500'} />
-        <ModalBody>
+        <ModalBody p={[1, 2, 3, 4]}>
           <TableContainer mb={4}>
             <Table variant='simple' size={['sm', 'sm', 'md']}>
               <Tbody>
@@ -73,14 +73,14 @@ const WeatherModal = ({ day, isOpen, onClose, isToday = false, isTomorrow = fals
                       <Td>
                         <Flex gap={5} align={'center'}>
                           {el.icon}
-                          {el.name}
+                          <Text fontSize={['sm', 'md']}>{el.name}</Text>
                         </Flex>
                       </Td>
                       <Td>
                         <Flex gap={1} align={'center'}>
                           <Spacer />
-                          <Text>{el.value}</Text>
-                          <Text>{el.hasOwnProperty('unit') ? el.unit : ''}</Text>
+                          <Text fontSize={['sm', 'md']}>{el.value}</Text>
+                          <Text fontSize={['sm', 'md']}>{el.hasOwnProperty('unit') ? el.unit : ''}</Text>
                         </Flex>
                       </Td>
                     </Tr>

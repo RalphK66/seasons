@@ -8,22 +8,21 @@ const Layout = ({ children }) => {
   const bgImageUrl = colorMode === 'light' ? '/images/clouds.jpg' : '/images/clouds_dark.jpg'
 
   return (
-    <Flex flexDir={'column'} minHeight={'100vh'} w={'100%'}>
+    <Flex
+      minHeight={'100vh'}
+      w={'100%'}
+      flexDir={'column'}
+      flex={1}
+      align={'center'}
+      justify={'center'}
+      bgImage={`url(${bgImageUrl})`}
+      bgPos='center'
+      bgSize={'cover'}
+      bgRepeat='no-repeat'
+      transition={'background-image 0.3s ease-in-out'}>
       <Header />
-      <Flex
-        as='main'
-        flexDir={'column'}
-        flex={1}
-        align={'center'}
-        justify={'center'}
-        bgImage={`url(${bgImageUrl})`}
-        bgPos='center'
-        bgSize={'cover'}
-        bgRepeat='no-repeat'
-        transition={'background-image 0.3s ease-in-out'}>
-        {children}
-        <StickyFooter />
-      </Flex>
+      {children}
+      <StickyFooter />
     </Flex>
   )
 }
